@@ -6,6 +6,8 @@ im Buffer sind, vereinfacht die Loesung stark
 #include <stdio.h>
 #include <ctype.h>
 
+#include "ghpringbuf.h"
+
 #define NMAX 4
 
 int iput = 0;  /* Position fuer naechstes abzulegende Zeichen */
@@ -14,6 +16,7 @@ int n = 0;     /* Anzahl der Zeichen im Buffer */
 int isOverwriting = 0;
 
 double buffer[NMAX];
+
 
 /* addring schreitet im Ring um eins weiter und sorgt dafuer dass
    (NMAX - 1) + 1 nicht NMAX sondern wieder 0 ist */
@@ -85,45 +88,3 @@ void printbuf()
 } 
 
 
-
-
-/* ringbuffertest.c */
-
-int main(void)
-{
-  char wastun[5];
-  double z;
-
-  do {
-    printbuf();
-    printf("Was tun ? ");
-    scanf("%s", (char*)&wastun);
-
-    switch (tolower(wastun[0])) {
-      case 'a': /* put */
-        printf("Zahl ? ");
-        scanf("%lf", &z);
-        put(z);
-        break;
-      case 'g': /* pop */
-        z = pop();
-        printf("%8.2f vom Buffer geholt\n", z);
-        break;
-      case 'e':
-        printf("Ende\n");
-        break;
-    case 'i':
-      printf("index ? ");
-      scanf("%lf", &z);
-      z = at(z);
-        printf("%8.2f vom Buffer geholt\n", z);
-        break;
-      default:
-        printf("%s - ungueltiger Befehl!\n", wastun);
-    } /* end switch */
-
-  } while (wastun[0] != 'e');
-
-  return 0;
-
-}
