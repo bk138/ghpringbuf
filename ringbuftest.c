@@ -31,9 +31,6 @@ int main(void)
   double z;
   ghpringbuf *buf = ghpringbuf_create(4, sizeof(double), 1, NULL);
   
-  if(!buf)
-    printf("HUHU");
-
   char what[5];
   do {
     test_printbuf(buf);
