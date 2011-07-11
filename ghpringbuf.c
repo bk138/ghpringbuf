@@ -53,6 +53,9 @@ ghpringbuf* ghpringbuf_create(size_t capacity, size_t item_size, int is_overwrit
 
 void ghpringbuf_destroy(ghpringbuf* b)
 {
+  if(!b)
+    return;
+
   if(b->clean_item)
     {
       size_t i, count = ghpringbuf_count(b); /* pop decrements count */
