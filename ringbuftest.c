@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 #include "ghpringbuf.h"
 
 
@@ -63,6 +64,7 @@ int main(void)
 {
   double z;
   A a;
+  A *a_ptr;
   ghpringbuf *buf = ghpringbuf_create(4, sizeof(A), 1, A_cleaner);
   
   
@@ -88,8 +90,9 @@ int main(void)
 
     case 'g': /* pop */
       
-      if(ghpringbuf_at(buf, 0, &a))
+      if(a_ptr = ghpringbuf_at(buf, 0))
 	{
+	  memcpy(&a, a_ptr, sizeof(A));  
 	  ghpringbuf_pop(buf);
 	  printf("got %8.2f from buffer\n", a.ptr_B->d);
 	}
@@ -101,8 +104,10 @@ int main(void)
 
       printf("what index? ");
       scanf("%lf", &z);
-      if(ghpringbuf_at(buf, z, &a))
+      if(a_ptr = ghpringbuf_at(buf, z)) {
+	memcpy(&a, a_ptr, sizeof(A));
 	printf("got %8.2f from buffer\n", a.ptr_B->d);
+      }
       else
 	printf("invalid index!\n");
       break;
