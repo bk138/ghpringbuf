@@ -42,10 +42,10 @@ void test_printbuf(ghpringbuf *b)
   int i;
   A *it = b->items;
 
-  printf("\ncount: %d\n", ghpringbuf_count(b));
-  printf("capacity: %d\n", b->capacity);
-  printf("iget: %d\n", b->iget);
-  printf("iput: %d\n", b->iput);
+  printf("\ncount: %zu\n", ghpringbuf_count(b));
+  printf("capacity: %zu\n", b->capacity);
+  printf("iget: %zu\n", b->iget);
+  printf("iput: %zu\n", b->iput);
 
   for(i = 0; i < b->capacity; ++i)
     {
